@@ -1,4 +1,3 @@
-```
 const hre = require("hardhat");
 
 async function main() {
@@ -8,18 +7,18 @@ async function main() {
 
   const [deployer] = await hre.ethers.getSigners();
   console.log("Deploying from account:", deployer.address);
-  
+
   const balance = await hre.ethers.provider.getBalance(deployer.address);
   console.log("Account balance:", hre.ethers.formatEther(balance), "ETH\n");
 
   const Journal = await hre.ethers.getContractFactory("Journal");
   console.log("📝 Deploying contract...");
-  
+
   const journal = await Journal.deploy();
   await journal.waitForDeployment();
 
   const address = await journal.getAddress();
-  
+
   console.log("\n================================================");
   console.log("✅ Deployment Successful!");
   console.log("================================================");
@@ -29,7 +28,7 @@ async function main() {
   console.log("Contract Owner:", await journal.owner());
   console.log("\n💡 Update CONTRACT_ADDRESS in app/contracts/Journal.ts");
   console.log("\n🔍 Verify with:");
-  console.log(`npx hardhat verify--network base ${ address } `);
+  console.log(`npx hardhat verify --network base ${address}`);
 }
 
 main().catch((error) => {
